@@ -1,7 +1,7 @@
-#include<iostream>
-#include<string>
-#include<cstring>
-
+#include <iostream>
+#include <string>
+#include <cstring>
+#include<fstream>
 // lớp định nghĩa nhân vật
 class Hero
 {
@@ -20,8 +20,7 @@ private:
 
 public:
     // constructor
-    Hero(std::string name, int strength,int endurace, float speed, int physicalDamage, int magicDamage, int criticalDamage
-    , int armor, int magicDefense,int damage,int coin)
+    Hero(std::string name, int strength, int endurace, float speed, int physicalDamage, int magicDamage, int criticalDamage, int armor, int magicDefense, int damage, int coin)
     {
         this->name = name;
         this->strength = strength;
@@ -31,9 +30,9 @@ public:
         this->magicDamage = magicDamage;
         this->criticalDamage = criticalDamage;
         this->armor = armor;
-        this->magicDefense=magicDamage;
-        this->damage=damage;
-        this->coin=400;
+        this->magicDefense = magicDamage;
+        this->damage = damage;
+        this->coin = 400;
     }
     // method getter and setter
     std::string getName() { return this->name; }
@@ -45,8 +44,8 @@ public:
     int getCriticalDamage() { return this->criticalDamage; }
     int getArmor() { return this->armor; }
     int getMagicDefense() { return this->magicDefense; }
-    int getDamage(){ return this->damage;}
-    int getCoin(){ return this->coin=coin;}
+    int getDamage() { return this->damage; }
+    int getCoin() { return this->coin = coin; }
 
     void setName(std::string name) { this->name = name; }
     void setStrength(int strenght) { this->strength = strenght; }
@@ -57,8 +56,8 @@ public:
     void setCriticalDamage(int criticalDamage) { this->criticalDamage = criticalDamage; }
     void setArmor(int armor) { this->armor = armor; }
     void setMagicDefense(int magicDefense) { this->magicDefense = magicDefense; }
-    void setDamage(int damage){ this->damage=damage;}
-    void setCoin(int coint){this->coin=coin;}
+    void setDamage(int damage) { this->damage = damage; }
+    void setCoin(int coint) { this->coin = coin; }
     void setInfo()
     {
         std::cout << "Name :";
@@ -94,12 +93,12 @@ public:
         std::cout << "Critical Damage: " << this->criticalDamage << std::endl;
         std::cout << "Armor: " << this->armor << std::endl;
         std::cout << "Magic Defense: " << this->magicDefense << std::endl;
-        std::cout << "Coin:"<<this->coin<<std::endl;
+        std::cout << "Coin:" << this->coin << std::endl;
 
         std::cin.ignore();
     }
     // method di chuyển
-    virtual int move(int setSpeed())= 0;
+    virtual int move(int setSpeed()) = 0;
     // virtual method tấn công
     virtual void attack() = 0;
     // virtual method phòng thủ
@@ -110,44 +109,47 @@ public:
 class Skill
 {
 protected:
-    virtual void skill_1()=0;
-    virtual void skill_2()=0;
-    virtual void ultimate()=0;
+    virtual void skill_1() = 0;
+    virtual void skill_2() = 0;
+    virtual void ultimate() = 0;
 };
 // đối tượng florentino
-class Florentino :public Hero,public Skill
+class Florentino : public Hero, public Skill
 {
 private:
-    std::string genre;
+    std::string genre; // giới tính
+
 public:
     Florentino();
-    Florentino(std::string genre,std::string name, int strength,int endurance, float speed, int physicalDamage, int magicDamage, int criticalDamage, int armor, int magicDefense,int damage,int coin)
-    :Hero(name,strength,endurance,speed,physicalDamage,magicDamage,criticalDamage,armor,magicDefense,damage,coin)
+    Florentino(std::string genre, std::string name, int strength, int endurance, float speed, int physicalDamage, int magicDamage, int criticalDamage, int armor, int magicDefense, int damage, int coin)
+        : Hero(name, strength, endurance, speed, physicalDamage, magicDamage, criticalDamage, armor, magicDefense, damage, coin)
     {
-        this->genre=genre;
+        this->genre = genre;
     }
-    
-    //method getter and setter
-    std::string getGenre(){return this->genre;}
-    void setGenre(std::string genre){ this->genre=genre;}
 
-    void setInformation()  
+    // method getter and setter
+    std::string getGenre() { return this->genre; }
+    void setGenre(std::string genre) { this->genre = genre; }
+
+    void setInformation()
     {
+        std::cout << "============FLORENTINO===========" << std::endl;
         Hero::setInfo();
-        std::cout<<"Genre: ";
-        std::cin>>this->genre;
+        std::cout << "Genre: ";
+        std::cin >> this->genre;
     }
 
-    void getInformation() 
+    void getInformation()
     {
-        std::cout<<"FLORENTINO"<<std::endl;
-        std::cout<<"Genre:"<<this->genre<<std::endl;
+        std::cout << "============FLORENTINO===========" << std::endl;
+        std::cout << "Genre:" << this->genre << std::endl;
         Hero::getInfor();
     }
-    void attack() override {
+    void attack() override
+    {
         skill_1();
         skill_2();
-        ultimate();    
+        ultimate();
     }
     int move(int setSpeed()) override
     {
@@ -156,28 +158,29 @@ public:
 
     void defend() override
     {
-        std::cout<<"FULL TANK"<<std::endl;
+        std::cout << "FULL TANK" << std::endl;
     }
 
-
-
-    void skill_1() override {
+    void skill_1() override
+    {
         std::cout << "Using Skill 1: Phi Hoa" << std::endl;
     }
 
-    void skill_2() override {
+    void skill_2() override
+    {
         std::cout << "Using Skill 2: Mua Kiem" << std::endl;
     }
 
-    void ultimate() override {
+    void ultimate() override
+    {
         std::cout << "Using Ultimate: Cuong Hoa:" << std::endl;
     }
 };
- // đối tượng murad
+// đối tượng murad
 class Murad : public Hero, public Skill
 {
 private:
-    std::string typeHero;
+    std::string typeHero; // thể loại tướng
 
 public:
     Murad();
@@ -187,23 +190,24 @@ public:
         this->typeHero = typeHero;
     }
 
-    std::string getTypeHero(){return this->typeHero;}
-    void getTypeHero(std::string typeHero){this->typeHero=typeHero;}
+    std::string getTypeHero() { return this->typeHero; }
+    void getTypeHero(std::string typeHero) { this->typeHero = typeHero; }
 
-    void setInformation() 
+    void setInformation()
     {
+        std::cout << "============MURAD===========" << std::endl;
         Hero::setInfo();
-        std::cout<<"Type Hero: ";
-        std::cin>>this->typeHero;
+        std::cout << "Type Hero: ";
+        std::cin >> this->typeHero;
     }
 
-     void getInformation() 
+    void getInformation()
     {
-        std::cout<<"Murad"<<std::endl;
-        std::cout<<"Type Hero:"<<this->typeHero<<std::endl;
+        std::cout << "============MURAD===========" << std::endl;
+        std::cout << "Type Hero:" << this->typeHero << std::endl;
         Hero::getInfor();
     }
-    
+
     void attack() override
     {
         skill_1();
@@ -213,15 +217,15 @@ public:
 
     void skill_1() override
     {
-        std::cout<<"Luot 3 lan:"<<std::endl;
+        std::cout << "Luot 3 lan:" << std::endl;
     }
     void skill_2() override
     {
-        std::cout<<"Xoay ao anh"<<std::endl;
+        std::cout << "Xoay ao anh" << std::endl;
     }
     void ultimate() override
     {
-        std::cout<<"Ao anh tram:"<<std::endl;
+        std::cout << "Ao anh tram:" << std::endl;
     }
     int move(int setSpeed()) override
     {
@@ -230,8 +234,220 @@ public:
 
     void defend() override
     {
-        std::cout<<"FULL TANK"<<std::endl;
+        std::cout << "FULL TANK" << std::endl;
     }
 };
 
+class Krixi : public Hero, public Skill
+{
+private:
+    std::string theFace; // gương mặt
 
+public:
+    // constructor
+    Krixi(std::string theFace, std::string name, int strength, int endurance, float speed, int physicalDamage, int magicDamage, int criticalDamage, int armor, int magicDefense, int damage, int coin)
+        : Hero(name, strength, endurance, speed, physicalDamage, magicDamage, criticalDamage, armor, magicDefense, damage, coin)
+    {
+        this->theFace = theFace;
+    }
+
+    void setInformation()
+    {
+        std::cout << "============KRIXI==============" << std::endl;
+        std::cout << "The Face:";
+        std::cin >> this->theFace;
+        Hero::getInfor();
+    }
+
+    void getInformation()
+    {
+        std::cout << "============KRIXI==============" << std::endl;
+        std::cout << "The Face: " << this->theFace << std::endl;
+        Hero::getInfor();
+    }
+
+    void attack() override
+    {
+        skill_1();
+        skill_2();
+        ultimate();
+    }
+
+    void skill_1() override
+    {
+        std::cout << "Tha buom" << std::endl;
+    }
+
+    void skill_2() override
+    {
+        std::cout << "Bao la" << std::endl;
+    }
+
+    void ultimate() override
+    {
+        std::cout << "Mua sao bang" << std::endl;
+    }
+
+    int move(int setSpeed()) override
+    {
+        return getSpeed();
+    }
+
+    void defend() override
+    {
+        std::cout << "FULL TANK" << std::endl;
+    }
+};
+
+class Toro : public Hero, public Skill
+{
+private:
+    std::string typeHero; // thể loại tướng
+
+public:
+    Toro();
+    Toro(std::string typeHero, std::string name, int strength, int endurance, float speed, int physicalDamage, int magicDamage, int criticalDamage, int armor, int magicDefense, int damage, int coin)
+        : Hero(name, strength, endurance, speed, physicalDamage, magicDamage, criticalDamage, armor, magicDefense, damage, coin)
+    {
+        this->typeHero = typeHero;
+    }
+
+    std::string getTypeHero() { return this->typeHero; }
+    void getTypeHero(std::string typeHero) { this->typeHero = typeHero; }
+
+    void setInformation()
+    {
+        std::cout << "============TORO===========" << std::endl;
+        Hero::setInfo();
+        std::cout << "Type Hero: ";
+        std::cin >> this->typeHero;
+    }
+
+    void getInformation()
+    {
+        std::cout << "============TORO===========" << std::endl;
+        std::cout << "Type Hero:" << this->typeHero << std::endl;
+        Hero::getInfor();
+    }
+
+    void attack() override
+    {
+        skill_1();
+        skill_2();
+        ultimate();
+    }
+    void skill_1() override
+    {
+        std::cout << "Huc" << std::endl;
+    }
+    void skill_2() override
+    {
+        std::cout << "Gong" << std::endl;
+    }
+    void ultimate() override
+    {
+        std::cout << "Dia chan" << std::endl;
+    }
+    int move(int setSpeed()) override
+    {
+        return getSpeed();
+    }
+
+    void defend() override
+    {
+        std::cout << "FULL TANK" << std::endl;
+    }
+};
+
+class Hayate: public Hero,public Skill
+{
+private:
+    std::string typeHero; // thể loại tướng
+
+public:
+    Hayate();
+    Hayate(std::string typeHero, std::string name, int strength, int endurance, float speed, int physicalDamage, int magicDamage, int criticalDamage, int armor, int magicDefense, int damage, int coin)
+        : Hero(name, strength, endurance, speed, physicalDamage, magicDamage, criticalDamage, armor, magicDefense, damage, coin)
+    {
+        this->typeHero = typeHero;
+    }
+
+    std::string getTypeHero() { return this->typeHero; }
+    void getTypeHero(std::string typeHero) { this->typeHero = typeHero; }
+
+      void setInformation()
+    {
+        std::cout << "============HAYATE===========" << std::endl;
+        Hero::setInfo();
+        std::cout << "Type Hero: ";
+        std::cin >> this->typeHero;
+    }
+
+    void getInformation()
+    {
+        std::cout << "============HAYATE===========" << std::endl;
+        std::cout << "Type Hero:" << this->typeHero << std::endl;
+        Hero::getInfor();
+    }
+
+    void attack() override
+    {
+        skill_1();
+        skill_2();
+        ultimate();
+    }
+    void skill_1() override
+    {
+        std::cout << "Chuoi phi tieu" << std::endl;
+    }
+    void skill_2() override
+    {
+        std::cout << "Luot" << std::endl;
+    }
+    void ultimate() override
+    {
+        std::cout << "Bao phi tieu" << std::endl;
+    }
+    int move(int setSpeed()) override
+    {
+        return getSpeed();
+    }
+
+    void defend() override
+    {
+        std::cout << "FULL TANK" << std::endl;
+    }
+
+};
+
+class File {
+private:
+    std::ofstream file;
+public:
+    File() {}
+    File(const std::string& filename) {
+        file.open(filename, std::ios::out | std::ios::app);
+    }
+    ~File() {
+        if (file.is_open()) {
+            file.close();
+        }
+    }
+    void writeToTextFile(const std::string& name, int strength, int endurance, int speed, int physicalDamage, int magicDamage, int criticalDamage, int armor, int magicDefense, int coin) {
+        if (file.is_open()) {
+            file << "Name: " << name << std::endl;
+            file << "Strength: " << strength << std::endl;
+            file << "Endurance: " << endurance << std::endl;
+            file << "Speed: " << speed << std::endl;
+            file << "Physical Damage: " << physicalDamage << std::endl;
+            file << "Magic Damage: " << magicDamage << std::endl;
+            file << "Critical Damage: " << criticalDamage << std::endl;
+            file << "Armor: " << armor << std::endl;
+            file << "Magic Defense: " << magicDefense << std::endl;
+            file << "Coin: " << coin << std::endl;
+        }
+        else {
+            std::cerr << "File is not open!" << std::endl;
+        }
+    }
+};
