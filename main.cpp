@@ -1,6 +1,8 @@
-#include <iostream>
-#include <string>
+#include<iostream>
+#include<string>
+#include<cstring>
 
+// lớp định nghĩa nhân vật
 class Hero
 {
 private:
@@ -103,3 +105,133 @@ public:
     // virtual method phòng thủ
     virtual void defend() = 0;
 };
+
+// lớp định nghĩa chiêu thức
+class Skill
+{
+protected:
+    virtual void skill_1()=0;
+    virtual void skill_2()=0;
+    virtual void ultimate()=0;
+};
+// đối tượng florentino
+class Florentino :public Hero,public Skill
+{
+private:
+    std::string genre;
+public:
+    Florentino();
+    Florentino(std::string genre,std::string name, int strength,int endurance, float speed, int physicalDamage, int magicDamage, int criticalDamage, int armor, int magicDefense,int damage,int coin)
+    :Hero(name,strength,endurance,speed,physicalDamage,magicDamage,criticalDamage,armor,magicDefense,damage,coin)
+    {
+        this->genre=genre;
+    }
+    
+    //method getter and setter
+    std::string getGenre(){return this->genre;}
+    void setGenre(std::string genre){ this->genre=genre;}
+
+    void setInformation()  
+    {
+        Hero::setInfo();
+        std::cout<<"Genre: ";
+        std::cin>>this->genre;
+    }
+
+    void getInformation() 
+    {
+        std::cout<<"FLORENTINO"<<std::endl;
+        std::cout<<"Genre:"<<this->genre<<std::endl;
+        Hero::getInfor();
+    }
+    void attack() override {
+        skill_1();
+        skill_2();
+        ultimate();    
+    }
+    int move(int setSpeed()) override
+    {
+        return getSpeed();
+    }
+
+    void defend() override
+    {
+        std::cout<<"FULL TANK"<<std::endl;
+    }
+
+
+
+    void skill_1() override {
+        std::cout << "Using Skill 1: Phi Hoa" << std::endl;
+    }
+
+    void skill_2() override {
+        std::cout << "Using Skill 2: Mua Kiem" << std::endl;
+    }
+
+    void ultimate() override {
+        std::cout << "Using Ultimate: Cuong Hoa:" << std::endl;
+    }
+};
+ // đối tượng murad
+class Murad : public Hero, public Skill
+{
+private:
+    std::string typeHero;
+
+public:
+    Murad();
+    Murad(std::string typeHero, std::string name, int strength, int endurance, float speed, int physicalDamage, int magicDamage, int criticalDamage, int armor, int magicDefense, int damage, int coin)
+        : Hero(name, strength, endurance, speed, physicalDamage, magicDamage, criticalDamage, armor, magicDefense, damage, coin)
+    {
+        this->typeHero = typeHero;
+    }
+
+    std::string getTypeHero(){return this->typeHero;}
+    void getTypeHero(std::string typeHero){this->typeHero=typeHero;}
+
+    void setInformation() 
+    {
+        Hero::setInfo();
+        std::cout<<"Type Hero: ";
+        std::cin>>this->typeHero;
+    }
+
+     void getInformation() 
+    {
+        std::cout<<"Murad"<<std::endl;
+        std::cout<<"Type Hero:"<<this->typeHero<<std::endl;
+        Hero::getInfor();
+    }
+    
+    void attack() override
+    {
+        skill_1();
+        skill_2();
+        ultimate();
+    }
+
+    void skill_1() override
+    {
+        std::cout<<"Luot 3 lan:"<<std::endl;
+    }
+    void skill_2() override
+    {
+        std::cout<<"Xoay ao anh"<<std::endl;
+    }
+    void ultimate() override
+    {
+        std::cout<<"Ao anh tram:"<<std::endl;
+    }
+    int move(int setSpeed()) override
+    {
+        return getSpeed();
+    }
+
+    void defend() override
+    {
+        std::cout<<"FULL TANK"<<std::endl;
+    }
+};
+
+
