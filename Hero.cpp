@@ -18,7 +18,8 @@ private:
 
 public:
     // constructor
-    Hero(std::string name, int strength, float speed, int physicalDamage, int magicDamage, int criticalDamage, int armor, int magicDefense,int damage,int coin)
+    Hero(std::string name, int strength,int endurace, float speed, int physicalDamage, int magicDamage, int criticalDamage
+    , int armor, int magicDefense,int damage,int coin)
     {
         this->name = name;
         this->strength = strength;
@@ -30,7 +31,7 @@ public:
         this->armor = armor;
         this->magicDefense=magicDamage;
         this->damage=damage;
-        this->coin=coin;
+        this->coin=400;
     }
     // method getter and setter
     std::string getName() { return this->name; }
@@ -43,6 +44,7 @@ public:
     int getArmor() { return this->armor; }
     int getMagicDefense() { return this->magicDefense; }
     int getDamage(){ return this->damage;}
+    int getCoin(){ return this->coin=coin;}
 
     void setName(std::string name) { this->name = name; }
     void setStrength(int strenght) { this->strength = strenght; }
@@ -54,6 +56,7 @@ public:
     void setArmor(int armor) { this->armor = armor; }
     void setMagicDefense(int magicDefense) { this->magicDefense = magicDefense; }
     void setDamage(int damage){ this->damage=damage;}
+    void setCoin(int coint){this->coin=coin;}
     void setInfo()
     {
         std::cout << "Name :";
@@ -74,6 +77,8 @@ public:
         std::cin >> this->armor;
         std::cout << "Magic Defense:";
         std::cin >> this->magicDefense;
+        std::cout << "Coin:";
+        std::cin >> this->coin;
         std::cin.ignore();
     }
     void getInfor()
@@ -87,8 +92,12 @@ public:
         std::cout << "Critical Damage: " << this->criticalDamage << std::endl;
         std::cout << "Armor: " << this->armor << std::endl;
         std::cout << "Magic Defense: " << this->magicDefense << std::endl;
+        std::cout << "Coin:"<<this->coin<<std::endl;
+
         std::cin.ignore();
     }
+    // method di chuyển
+    virtual int move(int setSpeed())= 0;
     // virtual method tấn công
     virtual void attack() = 0;
     // virtual method phòng thủ

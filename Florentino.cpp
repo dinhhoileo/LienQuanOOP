@@ -13,38 +13,33 @@ public:
         this->genre=genre;
     }
     
+    //method getter and setter
+    std::string getGenre(){return this->genre;}
+    void setGenre(std::string genre){ this->genre=genre;}
+
     void setInformation()  
     {
         Hero::setInfo();
         std::cout<<"Genre: ";
         std::cin>>this->genre;
     }
-    void move()
+
+    void attack() override {
+        skill_1();
+        skill_2();
+        ultimate();    
+    }
+    int move(int setSpeed()) override
     {
-        std::cout<<"go straight , turn left , turn right , turn around"<<std::endl;
+        return getSpeed();
     }
-        void attack() override {
-        std::cout << "Choose a skill to use:" << std::endl;
-        std::cout << "1. Skill 1" << std::endl;
-        std::cout << "2. Skill 2" << std::endl;
-        std::cout << "3. Ultimate" << std::endl;
-        int choice;
-        std::cin >> choice;
-        switch (choice) {
-            case 1:
-                skill_1();
-                break;
-            case 2:
-                skill_2();
-                break;
-            case 3:
-                ultimate();
-                break;
-            default:
-                std::cout << "Invalid choice." << std::endl;
-                break;
-        }
+
+    void defend() override
+    {
+        std::cout<<"FULL TANK"<<std::endl;
     }
+
+
 
     void skill_1() override {
         std::cout << "Using Skill 1: Phi Hoa" << std::endl;
@@ -55,6 +50,12 @@ public:
     }
 
     void ultimate() override {
-        std::cout << "Using Ultimate: Cuong Hoa" << std::endl;
+        std::cout << "Using Ultimate: Cuong Hoa:" << std::endl;
+    }
+    void getInformation() 
+    {
+        std::cout<<"FLORENTINO"<<std::endl;
+        std::cout<<"Genre:"<<this->genre<<std::endl;
+        Hero::getInfor();
     }
 };
