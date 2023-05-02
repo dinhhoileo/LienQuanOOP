@@ -1,0 +1,3 @@
+# LienQuanOOP
+MỤC ĐÍCH LÀ ĐỂ LUYỆN TẬP THÊM VỀ KỸ NĂNG LẬP TRÌNH HƯỚNG ĐỐI TƯỢNG CHO TỐT HƠN
+CHỨ THẬT RA LÀM GÌ CÓ CON GAME LIÊN QUÂN PHAKE NÀO ĐÂU
